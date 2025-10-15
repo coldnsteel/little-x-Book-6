@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little X and the Star Navigators - Book 6</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #000428 0%, #004e92 50%, #000000 100%);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+        @keyframes float-up {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-100px) scale(1.5); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes guest-pop {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px #00ffff;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 10px;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ffff; }
+            to { text-shadow: 0 0 30px #00ffff, 0 0 40px #ffffff; }
+        }
+        .chapter {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+        .chapter h2 {
+            color: #00ffff;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chalkboard-container {
+            background: rgba(0, 255, 255, 0.1);
+            border: 3px dashed #00ffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+        .star-block {
+            display: inline-block;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: grab;
+            font-weight: bold;
+            margin: 5px;
+            border: 2px solid #fff;
+            transition: transform 0.2s;
+        }
+        .star-block:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        .star-block:active {
+            cursor: grabbing;
+        }
+        .btn {
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
+        }
+        .controls, .instruments {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .story-text {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .character-speech {
+            background: rgba(0, 255, 255, 0.1);
+            border-left: 4px solid #00ffff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .guest-chat {
+            background: rgba(138, 43, 226, 0.1);
+            border-left: 4px solid #8a2be2;
+            animation: guest-pop 1s ease-out;
+        }
+        .planet {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .planet:hover {
+            transform: scale(1.2);
+        }
+        .nav-buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2em; }
+            .chapter { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="stars-container"></div>
+    
+    <div class="container">
+        <h1>⭐ Little X and the Star Navigators ⭐</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #00ffff;">Book 6 of the Little X Adventures</p>
+        
+        <div class="chapter">
+            <h2>🌟 Chapter 1: Cosmic Compass Quest!</h2>
+            
+            <div class="story-text">
+                <p>The workshop EXPLODED into a swirling galaxy! Stars twinkled everywhere, comets whooshed past, and Little X floated in zero-gravity giggles!</p>
+                
+                <div class="character-speech">
+                    <strong>Starry ARIA:</strong> "Twinkle-twirl! Welcome to the cosmos! Stars aren't just pretty sparkles—they're your SPACE GPS! Ancient sailors followed the Big Dipper to find their way home across oceans. Lost in the woods? Find the North Star! Your code stuck? Stars point you to 'Try Again!' Every adventure needs navigation!"
+                </div>
+                
+                <p>Raaarrr spun like a dizzy comet, his scales shimmering with stardust. "Raaarrr-WHOA! I chomped on a black hole by mistake... oopsie! Can stars save confused dinos too?"</p>
+                
+                <div class="character-speech">
+                    <strong>Captain Hooty (Socrates in a space helmet):</strong> "Hoot-navigate! Absolutely! For thousands of years, creatures have used stars to find their way. Today you'll learn REAL navigation skills! Drag constellation blocks to light up maze paths. You have 45 seconds—hop between stars like cosmic checkers! The real skill? Learning to find North, East, South, and West using the sky as your map!"
+                </div>
+                
+                <div class="character-speech">
+                    <strong>Little X:</strong> "Stars give me superpowers? LET'S NAVIGATE!"
+                </div>
+                
+                <p>Uncle Harold appeared in an astronaut suit. "Before my workshop adventures, I was a star navigator! Let me teach you the ancient art of celestial navigation—it might save your life someday!"</p>
+            </div>
+            
+            <div class="chalkboard-container">
+                <h3>⭐ Drag & Hop: Navigate the Nebula Maze!</h3>
+                <p>Drag constellation blocks to light up maze paths! Follow the North Star to the treasure! 45-second timer—dash or get starry-stuck!</p>
+                <canvas id="star-canvas" width="600" height="400" style="background: #000428; border: 2px solid #FFD700; border-radius: 10px; cursor: crosshair; display: block; margin: 20px auto;"></canvas>
+                <div id="star-timer" style="font-size: 24px; color: #FFD700; margin: 10px 0;">Time: 45s ⏰ – Pick a constellation!</div>
+                <div class="instruments">
+                    <button class="btn" onclick="startStarDash('bigdipper')">🪐 Big Dipper (Points North!)</button>
+                    <button class="btn" onclick="startStarDash('cassiopeia')">🌟 Cassiopeia (Finds East!)</button>
+                </div>
+                <div id="star-blocks" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 15px 0;">
+                    <div class="star-block" draggable="true" data-path="north">⭐⭐⭐ North Path</div>
+                    <div class="star-block" draggable="true" data-path="east">⭐⭐ East Turn</div>
+                    <div class="star-block" draggable="true" data-path="treasure">💎 Treasure Hop!</div>
+                </div>
+                <div class="controls">
+                    <button class="btn" onclick="checkStarPath()">Check My Path! ✨</button>
+                    <button class="btn" onclick="resetStars()">Lost? Reset & Try Again!</button>
+                </div>
+                <div id="star-message" style="color: #00ffff; font-weight: bold; margin-top: 15px;">Drag the Big Dipper stars to find the North Star!</div>
+                <p style="font-size: 14px; color: #ffff00; margin-top: 10px;">💡 Real Navigation Tip: The Big Dipper's pointer stars lead to Polaris (North Star), which stays fixed while other stars rotate. Sailors used this for centuries!</p>
+            </div>
+            
+            <div class="story-text">
+                <p>As Little X dragged constellation blocks, the maze paths lit up with cosmic trails! Stars aligned, and suddenly—WHOOSH!—the treasure chest appeared!</p>
+                
+                <div class="character-speech">
+                    <strong>Captain Hooty:</strong> "Hoot-magnificent! You used REAL astronomy! The Big Dipper points to the North Star—Polaris—which stays fixed at true north. Sailors navigated entire oceans using this! You can navigate forests, deserts, ANYWHERE under the stars!"
+                </div>
+                
+                <div class="character-speech">
+                    <strong>Raaarrr:</strong> "Raaarrr! I navigated! No more chomping black holes by accident! Stars = dino GPS!"
+                </div>
+                
+                <div class="character-speech guest-chat">
+                    <strong>Keanu (materializing from starlight):</strong> "Beautiful navigation, Little X. The stars have guided travelers for millennia. Now you carry that ancient wisdom in your heart. The cosmos connects us all across time and space."
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn" onclick="loadChapter(2)" style="font-size: 18px; padding: 15px 30px;">
+                    🚀 Continue to Chapter 2: Planet Hop Race! →
+                </button>
+            </div>
+        </div>
+        
+        <div class="chapter" id="chapter2" style="display: none;">
+            <h2>🪐 Chapter 2: Planet Hop Race!</h2>
+            
+            <div class="story-text">
+                <p>The galaxy transformed into a spectacular solar system! Planets orbited in colorful paths, and Little X stood at the starting line of the Cosmic Race Track!</p>
+                
+                <div class="character-speech">
+                    <strong>Starry ARIA:</strong> "Time for the ULTIMATE astronomy challenge! Race through the solar system, hopping from planet to planet! But here's the twist—you need to hop in the CORRECT ORDER from the Sun! Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune! Get them wrong and you'll bounce backward!"
+                </div>
+                
+                <div class="character-speech">
+                    <strong>Raaarrr:</strong> "Raaarrr-race! I'll bounce to Jupiter and munch its storms! Wait... can dinos eat gas giants?"
+                </div>
+                
+                <div class="character-speech">
+                    <strong>Captain Hooty:</strong> "Hoot-careful! Each planet has special properties. Mercury is scorching hot! Neptune is freezing cold! Jupiter has a Great Red Spot storm bigger than Earth! Learn the planets and you'll know our cosmic neighborhood!"
+                </div>
+                
+                <p>Uncle Harold projected a holographic solar system. "The order matters because it teaches distances from the Sun. It's not just memorization—it's understanding our place in space!"</p>
+            </div>
+            
+            <div class="chalkboard-container">
+                <h3>🪐 Planet Hop Race Challenge!</h3>
+                <p>Click planets in the correct order from the Sun! Fastest time wins! Get one wrong and start over!</p>
+                
+                <div id="solar-system" style="background: radial-gradient(circle, #FFD700 0%, #000428 100%); padding: 30px; border-radius: 15px; margin: 20px 0; min-height: 250px; position: relative;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="display: inline-block; width: 80px; height: 80px; background: radial-gradient(circle, #FFD700, #FFA500); border-radius: 50%; box-shadow: 0 0 40px #FFD700;">
+                            <div style="line-height: 80px; font-size: 40px;">☀️</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                        <div class="planet" data-planet="mercury" onclick="hopPlanet('mercury')" style="background: radial-gradient(circle, #8C7853, #5C4033);" title="Mercury">☿️</div>
+                        <div class="planet" data-planet="venus" onclick="hopPlanet('venus')" style="background: radial-gradient(circle, #FFA500, #FF8C00);" title="Venus">♀️</div>
+                        <div class="planet" data-planet="earth" onclick="hopPlanet('earth')" style="background: radial-gradient(circle, #4169E1, #228B22);" title="Earth">🌍</div>
+                        <div class="planet" data-planet="mars" onclick="hopPlanet('mars')" style="background: radial-gradient(circle, #CD5C5C, #8B0000);" title="Mars">♂️</div>
+                        <div class="planet" data-planet="jupiter" onclick="hopPlanet('jupiter')" style="background: radial-gradient(circle, #DAA520, #B8860B); width: 80px; height: 80px;" title="Jupiter">♃</div>
+                        <div class="planet" data-planet="saturn" onclick="hopPlanet('saturn')" style="background: radial-gradient(circle, #F4A460, #DAA520); width: 75px; height: 75px;" title="Saturn">♄</div>
+                        <div class="planet" data-planet="uranus" onclick="hopPlanet('uranus')" style="background: radial-gradient(circle, #4FD0E5, #2E8B97);" title="Uranus">♅</div>
+                        <div class="planet" data-planet="neptune" onclick="hopPlanet('neptune')" style="background: radial-gradient(circle, #4169E1, #000080);" title="Neptune">♆</div>
+                    </div>
+                </div>
+                
+                <div id="race-timer" style="font-size: 24px; color: #00ffff; margin: 10px 0;">Ready to race? Click START!</div>
+                <div id="planet-progress" style="font-size: 18px; color: #FFD700; margin: 10px 0;">Planets hopped: 0/8</div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="startPlanetRace()" style="font-size: 18px; padding: 15px 30px;">🚀 START RACE!</button>
+                    <button class="btn" onclick="resetPlanetRace()">Reset Race</button>
+                </div>
+                
+                <div id="race-result" style="margin-top: 15px; padding: 15px; background: rgba(0, 255, 255, 0.2); border-radius: 10px; min-height: 50px; color: #00ff00; font-weight: bold;"></div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(138, 43, 226, 0.2); border-radius: 10px; text-align: left;">
+                    <h4 style="color: #8a2be2; margin-top: 0;">🌟 Planet Facts!</h4>
+                    <ul style="font-size: 14px;">
+                        <li><strong>Mercury</strong> ☿️ - Closest to Sun, smallest planet, scorching days & freezing nights</li>
+                        <li><strong>Venus</strong> ♀️ - Hottest planet due to greenhouse gases, spins backward!</li>
+                        <li><strong>Earth</strong> 🌍 - Our home! Only known planet with life</li>
+                        <li><strong>Mars</strong> ♂️ - The Red Planet, has the biggest volcano in the solar system</li>
+                        <li><strong>Jupiter</strong> ♃ - Largest planet, Great Red Spot storm, 79+ moons!</li>
+                        <li><strong>Saturn</strong> ♄ - Famous rings made of ice and rock</li>
+                        <li><strong>Uranus</strong> ♅ - Tilted sideways, ice giant</li>
+                        <li><strong>Neptune</strong> ♆ - Farthest planet, fastest winds in solar system</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="story-text">
+                <p>Little X hopped through the planets perfectly! Each click taught a new fact about our cosmic neighborhood.</p>
+                
+                <div class="character-speech">
+                    <strong>ARIA:</strong> "PERFECT! You navigated the entire solar system! You know the order, the facts, and your place in the cosmos! From tiny Mercury to gigantic Jupiter—you've traveled it all!"
+                </div>
+                
+                <div class="character-speech">
+                    <strong>Raaarrr:</strong> "Raaarrr! I raced faster than Neptune's winds! Can we do it again? I want to visit Saturn's rings!"
+                </div>
+                
+                <div class="character-speech">
+                    <strong>Captain Hooty:</strong> "Hoot-remarkable! Now you understand our solar system. But remember—this is just ONE tiny corner of a galaxy with billions of stars, in a universe with billions of galaxies! The cosmos is VAST, and you've taken your first steps into exploring it!"
+                </div>
+                
+                <div class="character-speech guest-chat">
+                    <strong>Keanu:</strong> "You've learned to navigate by stars and know your cosmic home. This knowledge connects you to every human who ever looked up at the night sky in wonder. Carry this curiosity forward, star navigator."
+                </div>
+                
+                <p style="text-align: center; font-size: 24px; color: #00ffff; text-shadow: 0 0 20px #00ffff; margin: 30px 0;">
+                    <em>✨ The End of Book 6... Until Book 7: Heart Quests! ✨</em>
+                </p>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn" onclick="loadChapter(1)" style="font-size: 18px; padding: 15px 30px;">
+                    🔄 Restart Book 6
+                </button>
+                <button class="btn" onclick="celebrateCompletion()" style="background: linear-gradient(45deg, #00ffff, #0080ff, #8a2be2); font-size: 18px; padding: 15px 30px;">
+                    🎉 Celebrate Star Navigation!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let audioContext = null;
+        function initAudio() {
+            if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioContext.state === 'suspended') audioContext.resume();
+        }
+        function playTone(freq, dur, type = 'sine') {
+            initAudio();
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+            gain.gain.setValueAtTime(0, audioContext.currentTime);
+            gain.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + dur);
+            osc.start(audioContext.currentTime);
+            osc.stop(audioContext.currentTime + dur);
+        }
+        
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+        
+        // STAR NAVIGATION GAME
+        let starMode = '';
+        let starTime = 45;
+        let starPath = [];
+        let mazeSteps = 0;
+        let starTimerInterval;
+        const starCanvas = document.getElementById('star-canvas');
+        const starCtx = starCanvas.getContext('2d');
+        
+        function drawGalaxyMaze() {
+            starCtx.clearRect(0, 0, 600, 400);
+            
+            // Stars background
+            for(let i = 0; i < 80; i++) {
+                starCtx.fillStyle = '#fff';
+                starCtx.fillRect(Math.random() * 600, Math.random() * 400, 2, 2);
+            }
+            
+            // Maze base path
+            starCtx.strokeStyle = '#FFD700';
+            starCtx.lineWidth = 3;
+            starCtx.beginPath();
+            starCtx.moveTo(50, 200);
+            starCtx.lineTo(550, 200);
+            starCtx.stroke();
+            
+            // North Star goal
+            starCtx.fillStyle = '#ffff00';
+            starCtx.font = '50px Arial';
+            starCtx.fillText('⭐', 530, 170);
+            starCtx.font = '14px Arial';
+            starCtx.fillStyle = '#00ffff';
+            starCtx.fillText('North Star!', 520, 190);
+            
+            // Player ship
+            starCtx.fillStyle = '#ff6b9d';
+            starCtx.beginPath();
+            starCtx.moveTo(50, 190);
+            starCtx.lineTo(70, 200);
+            starCtx.lineTo(50, 210);
+            starCtx.fill();
+            
+            // Light up path steps
+            starPath.forEach((step, i) => {
+                const x = 100 + i * 140;
+                starCtx.fillStyle = '#00ff00';
+                starCtx.fillRect(x, 175, 120, 50);
+                starCtx.fillStyle = '#000';
+                starCtx.font = '16px Arial';
+                starCtx.fillText(step, x + 10, 205);
+            });
+        }
+        
+        // Drag-drop setup
+        document.querySelectorAll('.star-block').forEach(block => {
+            block.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('text', e.target.dataset.path);
+            });
+        });
+        
+        starCanvas.addEventListener('dragover', e => e.preventDefault());
+        starCanvas.addEventListener('drop', e => {
+            e.preventDefault();
+            const path = e.dataTransfer.getData('text');
+            
+            if (starPath.length < 3) {
+                if ((starMode === 'bigdipper' && path === 'north') ||
+                    (starMode === 'cassiopeia' && path === 'east') ||
+                    path === 'treasure') {
+                    starPath.push(path);
+                    mazeSteps++;
+                    drawGalaxyMaze();
+                    
+                    const msg = document.getElementById('star-message');
+                    if (mazeSteps === 3) {
+                        msg.textContent = `⭐ All 3 steps placed! Click CHECK PATH to reach the North Star!`;
+                    } else {
+                        msg.textContent = `✨ Step ${mazeSteps} placed! ${3 - mazeSteps} more to go!`;
+                    }
+                    
+                    initAudio();
+                    playTone(659, 0.2, 'sine');
+                }
+            }
+        });
+        
+        function startStarDash(mode) {
+            starMode = mode;
+            starTime = 45;
+            starPath = [];
+            mazeSteps = 0;
+            drawGalazyMaze();
+            
+            document.getElementById('star-timer').textContent = `Time: ${starTime}s ⏰`;
+            document.getElementById('star-timer').style.color = '#FFD700';
+            document.getElementById('star-message').textContent = 
+                mode === 'bigdipper' ? 
+                '🪐 Big Dipper guides NORTH! Drag North Path blocks to navigate!' : 
+                '🌟 Cassiopeia turns EAST! Drag East Turn blocks!';
+            
+            clearInterval(starTimerInterval);
+            starTimerInterval = setInterval(() => {
+                starTime--;
+                document.getElementById('star-timer').textContent = `Time: ${starTime}s ⏰`;
+                
+                if (starTime <= 10) {
+                    document.getElementById('star-timer').style.color = '#ff6b9d';
+                }
+                
+                if (starTime <= 0) {
+                    clearInterval(starTimerInterval);
+                    document.getElementById('star-message').textContent = 
+                        '⏰ Starry oopsie! Time ran out! Click RESET for a cosmic do-over!';
+                    initAudio();
+                    playTone(392, 0.3, 'square');
+                }
+            }, 1000);
+            
+            initAudio();
+            playTone(880, 0.3, 'sine');
+        }
+        
+        function checkStarPath() {
+            if (mazeSteps !== 3) {
+                document.getElementById('star-message').textContent = 
+                    '⚠️ You need all 3 path blocks placed first!';
+                initAudio();
+                playTone(349, 0.3, 'square');
+                return;
+            }
+            
+            clearInterval(starTimerInterval);
+            
+            // WIN ANIMATION: Ship flies to star!
+            let shipX = 50;
+            const flyInterval = setInterval(() => {
+                drawGalaxyMaze();
+                
+                // Draw ship at new position
+                starCtx.fillStyle = '#ff6b9d';
+                starCtx.beginPath();
+                starCtx.moveTo(shipX, 190);
+                starCtx.lineTo(shipX + 20, 200);
+                starCtx.lineTo(shipX, 210);
+                starCtx.fill();
+                
+                // Trail sparkles
+                starCtx.fillStyle = '#00ffff';
+                starCtx.fillRect(shipX - 5, 195, 5, 10);
+                
+                shipX += 15;
+                
+                if (shipX > 530) {
+                    clearInterval(flyInterval);
+                    document.getElementById('star-message').textContent = 
+                        '🌟 NAVIGATOR WIN! You found the North Star using real astronomy! This skill works in forests, deserts, anywhere!';
+                    
+                    initAudio();
+                    playTone(523, 0.3, 'sine');
+                    setTimeout(() => playTone(659, 0.3, 'sine'), 150);
+                    setTimeout(() => playTone(784, 0.3, 'sine'), 300);
+                    setTimeout(() => playTone(1046, 0.5, 'sine'), 450);
+                    
+                    // Celebration sparkles
+                    for (let i = 0; i < 20; i++) {
+                        setTimeout(() => {
+                            const sparkle = document.createElement('div');
+                            sparkle.textContent = ['⭐', '✨', '💫'][Math.floor(Math.random() * 3)];
+                            sparkle.style.cssText = `position: absolute; font-size: 24px; color: #00ffff; 
+                                left: ${Math.random() * 600}px; top: ${Math.random() * 400}px; 
+                                animation: float-up 1.5s ease-out forwards; pointer-events: none; z-index: 100;`;
+                            starCanvas.parentElement.appendChild(sparkle);
+                            setTimeout(() => sparkle.remove(), 1500);
+                        }, i * 100);
+                    }
+                }
+            }, 150);
+        }
+        
+        function resetStars() {
+            clearInterval(starTimerInterval);
+            starPath = [];
+            mazeSteps = 0;
+            starTime = 45;
+            starMode = '';
+            drawGalaxyMaze();
+            document.getElementById('star-timer').textContent = 'Time: 45s ⏰ – Pick a constellation!';
+            document.getElementById('star-timer').style.color = '#FFD700';
+            document.getElementById('star-message').textContent = 'Ready to navigate the stars again! Pick a constellation!';
+        }
+        
+        // PLANET HOP RACE
+        const planetOrder = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'];
+        let currentPlanetIndex = 0;
+        let raceStartTime = 0;
+        let raceTimerInterval;
+        let raceActive = false;
+        
+        function startPlanetRace() {
+            currentPlanetIndex = 0;
+            raceActive = true;
+            raceStartTime = Date.now();
+            
+            document.getElementById('planet-progress').textContent = 'Planets hopped: 0/8 🚀';
+            document.getElementById('race-result').textContent = 'Race started! Click planets in order from the Sun!';
+            document.getElementById('race-result').style.background = 'rgba(0, 255, 255, 0.2)';
+            
+            // Reset planet appearances
+            document.querySelectorAll('.planet').forEach(p => {
+                p.style.opacity = '1';
+                p.style.filter = 'none';
+            });
+            
+            clearInterval(raceTimerInterval);
+            raceTimerInterval = setInterval(() => {
+                const elapsed = ((Date.now() - raceStartTime) / 1000).toFixed(1);
+                document.getElementById('race-timer').textContent = `⏱️ Time: ${elapsed}s`;
+            }, 100);
+            
+            initAudio();
+            playTone(523, 0.3, 'sine');
+        }
+        
+        function hopPlanet(planet) {
+            if (!raceActive) {
+                document.getElementById('race-result').textContent = '⚠️ Click START RACE first!';
+                return;
+            }
+            
+            if (planet === planetOrder[currentPlanetIndex]) {
+                // Correct planet!
+                currentPlanetIndex++;
+                
+                const planetEl = document.querySelector(`[data-planet="${planet}"]`);
+                planetEl.style.filter = 'brightness(1.5)';
+                planetEl.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    planetEl.style.opacity = '0.4';
+                    planetEl.style.transform = 'scale(1)';
+                }, 300);
+                
+                document.getElementById('planet-progress').textContent = 
+                    `Planets hopped: ${currentPlanetIndex}/8 🚀`;
+                
+                initAudio();
+                playTone(440 + currentPlanetIndex * 100, 0.2, 'sine');
+                
+                if (currentPlanetIndex === 8) {
+                    // RACE WON!
+                    clearInterval(raceTimerInterval);
+                    raceActive = false;
+                    const finalTime = ((Date.now() - raceStartTime) / 1000).toFixed(1);
+                    
+                    document.getElementById('race-result').innerHTML = `
+                        <div style="font-size: 22px;">🏆 COSMIC CHAMPION! 🏆</div>
+                        <div style="margin-top: 10px;">Finished in ${finalTime} seconds!</div>
+                        <div style="margin-top: 10px; font-size: 14px;">You navigated the entire solar system perfectly!</div>
+                    `;
+                    document.getElementById('race-result').style.background = 'rgba(0, 255, 0, 0.3)';
+                    
+                    initAudio();
+                    for (let i = 0; i < 8; i++) {
+                        setTimeout(() => playTone(523 + i * 50, 0.2, 'sine'), i * 100);
+                    }
+                    
+                    // Victory sparkles
+                    for (let i = 0; i < 30; i++) {
+                        setTimeout(() => {
+                            const sparkle = document.createElement('div');
+                            sparkle.textContent = ['🪐', '⭐', '🌟', '✨'][Math.floor(Math.random() * 4)];
+                            sparkle.style.cssText = `position: fixed; left: ${Math.random() * window.innerWidth}px; 
+                                top: ${Math.random() * window.innerHeight}px; font-size: ${30 + Math.random() * 30}px; 
+                                animation: float-up 2s ease-out forwards; pointer-events: none; z-index: 9999;`;
+                            document.body.appendChild(sparkle);
+                            setTimeout(() => sparkle.remove(), 2000);
+                        }, i * 100);
+                    }
+                }
+            } else {
+                // Wrong planet!
+                const planetEl = document.querySelector(`[data-planet="${planet}"]`);
+                planetEl.style.filter = 'brightness(0.5) hue-rotate(180deg)';
+                setTimeout(() => {
+                    planetEl.style.filter = 'none';
+                }, 300);
+                
+                document.getElementById('race-result').textContent = 
+                    `❌ Oops! That's not the next planet! Expected: ${planetOrder[currentPlanetIndex].toUpperCase()}. Try again!`;
+                document.getElementById('race-result').style.background = 'rgba(255, 107, 157, 0.3)';
+                
+                initAudio();
+                playTone(300, 0.3, 'square');
+            }
+        }
+        
+        function resetPlanetRace() {
+            clearInterval(raceTimerInterval);
+            currentPlanetIndex = 0;
+            raceActive = false;
+            
+            document.querySelectorAll('.planet').forEach(p => {
+                p.style.opacity = '1';
+                p.style.filter = 'none';
+                p.style.transform = 'scale(1)';
+            });
+            
+            document.getElementById('race-timer').textContent = 'Ready to race? Click START!';
+            document.getElementById('planet-progress').textContent = 'Planets hopped: 0/8';
+            document.getElementById('race-result').textContent = 'Race reset! Click START RACE when ready!';
+            document.getElementById('race-result').style.background = 'rgba(0, 255, 255, 0.2)';
+        }
+        
+        function loadChapter(num) {
+            document.querySelectorAll('.chapter').forEach(ch => ch.style.display = 'none');
+            const target = num === 1 ? document.querySelector('.chapter') : document.getElementById('chapter' + num);
+            if (target) {
+                target.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+            
+            if (num === 1) {
+                setTimeout(() => {
+                    drawGalaxyMaze();
+                }, 100);
+            } else if (num === 2) {
+                resetPlanetRace();
+            }
+        }
+        
+        function celebrateCompletion() {
+            initAudio();
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    playTone(523 + Math.random() * 400, 0.3, 'sine');
+                    const emojis = ['🌟', '⭐', '🪐', '🚀', '✨', '💫'];
+                    const fw = document.createElement('div');
+                    fw.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    fw.style.cssText = `position: fixed; left: ${Math.random() * window.innerWidth}px; 
+                        top: ${Math.random() * window.innerHeight}px; font-size: ${40 + Math.random() * 40}px; 
+                        animation: float-up 2.5s ease-out forwards; pointer-events: none; z-index: 9999;`;
+                    document.body.appendChild(fw);
+                    setTimeout(() => fw.remove(), 2500);
+                }, i * 150);
+            }
+            
+            setTimeout(() => {
+                alert(`🌟 BOOK 6 COMPLETE! 🌟
+
+You mastered STAR NAVIGATION!
+
+You learned:
+⭐ Constellation navigation (Big Dipper, Cassiopeia)
+🧭 Finding North using the North Star
+🪐 All 8 planets in order from the Sun
+🌍 Amazing facts about our solar system
+🚀 Real astronomy skills for life!
+
+You're ready for Book 7: Heart Quests! ❤️`);
+            }, 3000);
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            drawGalaxyMaze();
+        });
+    </script>
+</body>
+</html>
